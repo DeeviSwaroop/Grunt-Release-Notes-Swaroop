@@ -82,7 +82,6 @@ module.exports = function(grunt) {
                 version = name.substring(0,separatorAt),
                 date = name.substring(separatorAt + 1),
                 parts = version.split(/\.|-/);
-
             files.push({name: name, version: version, date: date, parts: parts});
         });
 
@@ -110,16 +109,23 @@ module.exports = function(grunt) {
                     name:name,
                     notesSuffix: options.notesSuffix
                 };
+                 console.log("INSIDE ::::::::::: Start");
+                 console.log(data);
+                 console.log("INSIDE ::::::::::: End");
                 return grunt.template.process('* <%= version %> - <%= date %> - ' +
                 '[<%= updateType %>](<%= baseLinkPath%><%= directory %>/<%= name %>.<%= notesSuffix %>)\n', {data:data});
             })
             .join('');
 
         if (false !== options.strict && grunt.file.readJSON('package.json').version !== last) {
-            grunt.fatal('Latest release notes and package.version do not match');
+                     grunt.fatal('Latest release notes and package.version do not match');
         }
         grunt.log.writeln(notes);
         grunt.config.set('releaseNotes.' + options.notesField, notes);
+
+        console.log(options.notesField);  
+        //console.log(readmePath);
+       // console.log(templatePath);
 
         if (readmePath && templatePath) {
             grunt.file.write(readmePath,
@@ -130,6 +136,7 @@ module.exports = function(grunt) {
 };
 
 function versionSort(versionA, versionB) {
+     console.log(versionA.version+"    "+versionB.version);
     return semver.lt(versionA.version, versionB.version) ? -1 : 1;
 }
 

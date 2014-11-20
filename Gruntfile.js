@@ -15,7 +15,7 @@ module.exports = function (grunt) {
                 src : 'templates/README.template.md',
                 dest : 'README.md',
                 baseLinkPath : 'https://github.com/DeeviSwaroop/Grunt-Release-Notes-Swaroop/tree/master/'
-               
+
             }
         },
 
@@ -23,4 +23,7 @@ module.exports = function (grunt) {
             'readme' : 'Do not modify directly. This file is compiled from a template.'
         }
     });
+
+   grunt.registerTask("default", ['releaseNotes']);
+
 };
